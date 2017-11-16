@@ -1,11 +1,37 @@
 import React from 'react';
 
+export default class Note extends React.Component {
 
-export default ({task, onDelete}) => (
+    constructor(props) {
+        super(props);
+    }
+    
+    render() {
+        var myStyle = {
+            color : this.props.myColor
+        }
+        
+        return (
+            <div>
+                <span style={myStyle}>{this.props.task}</span>
+                <button onClick={this.props.onDelete}>x</button>
+            </div>
+        )
+    }
+}
+
+
+/*
+export default ({onDelete, task, myColor}) => (
+
     <div>
-        <span>{task}</span>
+        
+        <span style={{color:{myColor}}} >{task}</span>
+        <span>{myColor}</span>
         <button onClick={onDelete}>x</button>
     </div>
         
 );
+    */
     
+  //<span style=color:{myColor} > {task} </span>

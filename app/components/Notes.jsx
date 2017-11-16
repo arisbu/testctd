@@ -3,11 +3,12 @@ import React from 'react';
 import Note from './Note';
 
 export default ({notes, onDelete=() => {}}) => (
-  <ul> {notes.map(({id, task}) =>
+  <ul> {notes.map(({id, myColor, task}) =>
     <li key={id}>
       <Note 
         onDelete={onDelete.bind(null, id)}
-      task = {task} />
+      task = {task}
+      myColor = {myColor} />
     </li>
     )}</ul>
     

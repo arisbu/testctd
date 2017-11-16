@@ -5,7 +5,9 @@ import uuid from 'uuid';
 
 
 
+
 export default class App extends React.Component {
+
   constructor(props) {
     super(props);
 
@@ -14,19 +16,24 @@ export default class App extends React.Component {
         {
           id: uuid.v4(),
           task: 'Learn React....'
+
         },
         {
           id: uuid.v4(),
           task: 'Do laundry'
+
         }
       ]
     };
   }
+  
+  
   render() {
     const {notes} = this.state;
 
     return (
       <div>
+        <button onClick={this.changeColors}>All New Colors!</button>
         <button onClick={this.addNote}>+</button>
         <Notes notes={notes} onDelete={this.deleteNote} />
       </div>
@@ -34,8 +41,27 @@ export default class App extends React.Component {
   }
   
   
+  changeColors = () => {
+    var allNotes = this.state.notes;
+    
+    for (var k in allNotes)  {
+      var myNote = allNotes[k];
+      myNote.myColor = this.randomColor();
+    }
+    
+    this.setState(allNotes);
+  }
   
   
+  
+  
+  randomColor = () => {
+      // From https://www.paulirish.com/2009/random-hex-color-code-snippets/
+      return '#'+Math.floor(Math.random()*16777215).toString(16);
+
+  }  
+
+
 
   addNote = () => {
     // It would be possible to write this in an imperative style.
@@ -51,6 +77,7 @@ export default class App extends React.Component {
     this.setState({
       notes: this.state.notes.concat([{
         id: uuid.v4(),
+        //myColor: this.randomColor(),
         task: 'New task'
       }])
     });
