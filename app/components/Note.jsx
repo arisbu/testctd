@@ -1,5 +1,15 @@
 import React from 'react';
 
+
+export default ({children, ...props}) => (
+    <div {...props}>
+        {children}
+    </div>
+);
+    
+
+
+/*
 export default class Note extends React.Component {
 
     constructor(props) {
@@ -19,7 +29,7 @@ export default class Note extends React.Component {
         )
     }
 }
-
+*/
 
 /*
 export default ({onDelete, task, myColor}) => (
