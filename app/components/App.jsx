@@ -78,6 +78,24 @@ export default class App extends React.Component {
     // more than make up for it.
     //
     // Libraries, such as Immutable.js, go a notch further.
+    
+    var allNotes = this.state.notes;
+    
+        console.log(`Pre Pre sort len = ${allNotes.length}`);
+    
+    allNotes = allNotes.concat([{
+        id: uuid.v4(),
+        //myColor: this.randomColor(),
+        task: 'New task'
+      }]);
+      
+    console.log(`Pre sort len = ${allNotes.length}`);
+    
+    allNotes = this.sortNote(allNotes);
+    
+    console.log(`Post sort len = ${allNotes.length}`);
+    
+    /*
     this.setState({
       notes: this.state.notes.concat([{
         id: uuid.v4(),
@@ -85,6 +103,13 @@ export default class App extends React.Component {
         task: 'New task'
       }])
     });
+    
+    */
+    
+    this.setState({
+      notes: allNotes
+    });
+    
   }  
   
   
@@ -108,16 +133,47 @@ export default class App extends React.Component {
   }
   
   
+  
+
+  
+  compareNotes = (a,b) => {
+    if(a.task.toLowerCase() < b.task.toLowerCase())  
+      return -1;
+    if (a.task.toLowerCase() > b.task.toLowerCase())
+      return 1;
+    return 0;
+  }
+
+  sortNote = (allNotes) => {
+    allNotes.sort(this.compareNotes);
+    return allNotes;
+  }
+
+
   editNote = (id, task) => {
-    this.setState({
-      notes: this.state.notes.map(note => {
+    
+
+    var allNotes = this.state.notes;
+    
+    allNotes.map(note => {
         if(note.id === id) {
           note.editing = false;
           note.task = task;
         }
         return note;
-      })
+      });
+    
+    this.sortNote(allNotes);
+    
+    this.setState({
+      // notes: this.state.notes.map(note => {
+      notes: allNotes
     });
+    
+    
+ 
+
+
   }
   
   
