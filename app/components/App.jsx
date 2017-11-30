@@ -33,8 +33,8 @@ export default class App extends React.Component {
 
     return (
       <div>
-        <button onClick={this.changeColors}>All New Colors!</button>
-        <button onClick={this.addNote}>+</button>
+        
+        <button onClick={this.addNote}>Add New Note</button>
         <Notes 
           notes={notes} 
           onNoteClick = {this.activateNoteEdit}
